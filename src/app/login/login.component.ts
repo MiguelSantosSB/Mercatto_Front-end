@@ -28,6 +28,7 @@ export class LoginComponent {
   }
 
   onCadastro(): void {
-    // TODO: Implementar navegação para tela de cadastro
+    this.router.navigate(['/register']);
   }
+
 }
