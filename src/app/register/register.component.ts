@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 import { FormsModule } from '@angular/forms';
 
 
@@ -22,8 +24,10 @@ export class RegisterComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
+
 
   onSubmit() {
     this.authService.register(
@@ -33,11 +37,14 @@ export class RegisterComponent {
       this.user.password
     ).subscribe({
       next: () => {
+        this.toastr.success('Cadastro realizado com sucesso!');
         this.router.navigate(['/']);
       },
       error: (err) => {
+        this.toastr.error('Erro ao realizar cadastro. Tente novamente.');
         console.error('Erro no cadastro:', err);
       }
     });
+
   }
 }
