@@ -24,4 +24,23 @@ export class AuthService {
       role: 'USER'
     });
   }
+
+  registerOwner(
+    name: string,
+    email: string,
+    phone: string,
+    cpf: string,
+    rg: string,
+    password: string
+  ): Observable<any> {
+    return this.http.post(this.registerUrl, {
+      name,
+      email,
+      phone,
+      cpf,
+      rg,
+      password,
+      role: 'OWNER'
+    });
+  }
 }

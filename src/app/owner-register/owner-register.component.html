@@ -1,0 +1,36 @@
+<div class="owner-register-container">
+  <h2>Cadastro de Vendedor</h2>
+  <form (ngSubmit)="onSubmit()" #ownerRegisterForm="ngForm">
+    <div class="form-group">
+      <label for="name">Nome Completo:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="owner.name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" [(ngModel)]="owner.email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Telefone:</label>
+      <input type="tel" id="phone" name="phone" [(ngModel)]="owner.phone" required>
+    </div>
+
+    <div class="form-group">
+      <label for="cpf">CPF:</label>
+      <input type="text" id="cpf" name="cpf" [(ngModel)]="owner.cpf" required>
+    </div>
+
+    <div class="form-group">
+      <label for="rg">RG:</label>
+      <input type="text" id="rg" name="rg" [(ngModel)]="owner.rg" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Senha:</label>
+      <input type="password" id="password" name="password" [(ngModel)]="owner.password" required>
+    </div>
+
+    <button type="submit" [disabled]="!ownerRegisterForm.form.valid">Cadastrar</button>
+  </form>
+</div>
