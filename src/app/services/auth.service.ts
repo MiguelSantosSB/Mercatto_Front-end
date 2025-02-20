@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   loginOwner(email: string, password: string): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(this.loginUrl, { email, password });
+    return this.http.post<any>(this.loginUrl, { email, password });
   }
 
   register(name: string, email: string, phone: string, password: string): Observable<any> {
