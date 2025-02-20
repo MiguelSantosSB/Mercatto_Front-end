@@ -40,9 +40,13 @@ export class OwnerLoginComponent {
           next: (userId) => {
             this.storeService.getOwnerStore(userId).subscribe({
               next: (store: any) => {
+                console.log('Store data received:', store);
                 if (store) {
+                  console.log('Store ID:', store.id);
                   this.notificationService.showSuccess('Logado com sucesso', 'Acesso autorizado');
-                  this.router.navigate(['/owner'])
+                  this.router.navigate(['/store', store.id])
+
+
                 } else {
                   this.router.navigate(['/address/create'])
                 }

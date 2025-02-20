@@ -1,0 +1,18 @@
+<div class="stores-container">
+  <h1>Lojas Disponíveis</h1>
+  
+  <div class="store-list">
+    <div class="store-card" *ngFor="let store of stores">
+      <div class="store-image">
+      </div>
+      <div class="store-info">
+        <h2>{{ store.name }}</h2>
+        <p class="store-description">{{ store.description }}</p>
+        <p class="store-address">{{ store.address }}</p>
+        <button class="visit-button" (click)="visitStore(store.id)">
+          Visitar Loja
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

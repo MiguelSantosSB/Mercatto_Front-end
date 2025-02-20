@@ -26,14 +26,19 @@ export class LoginComponent {
   onLogin(): void {
     this.authService.login(this.email, this.password).subscribe({
       next: (response: any) => {
-        this.toastr.success('Login realizado com sucesso!');
-        this.router.navigate(['/']);
+        if (response.token) {
+          localStorage.setItem('token', response.token);
+          this.toastr.success('Login realizado com sucesso!');
+          this.router.navigate(['/stores'])
+            .then(() => window.location.reload());
+        } else {
+          this.toastr.error('Token não recebido na resposta.');
+        }
       },
       error: (error: any) => {
         this.toastr.error('Erro ao realizar login. Verifique suas credenciais.');
         console.error('Erro no login:', error);
       }
-
     });
   }
 

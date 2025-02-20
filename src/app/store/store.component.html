@@ -1,0 +1,74 @@
+<div *ngIf="store; else loading">
+  <!-- Cabeçalho -->
+  <div class="header">
+    <h1>{{ store.name }}</h1>
+    <div class="cart-section" *ngIf="!isOwner">
+      <div class="cart-items">
+        <div *ngFor="let item of cartItems" class="cart-item">
+          <p>{{ item.productName }} - {{ item.quantity }} x R$ {{ item.price | number:'1.2-2' }}</p>
+        </div>
+      </div>
+      <button class="btn-primary" (click)="checkout()">Finalizar Compra</button>
+    </div>
+    <div class="store-info">
+
+      <p><i class="fas fa-phone"></i> {{ store.telephone }}</p>
+      <p *ngIf="address"><i class="fas fa-map-marker-alt"></i> {{ address.street }}, {{ address.number }} - {{ address.neighborhood }}</p>
+    </div>
+  </div>
+
+  <!-- Descrição da loja -->
+  <div class="description" *ngIf="store.description">
+    <h2>Sobre a loja</h2>
+    <p>{{ store.description }}</p>
+  </div>
+
+  <!-- Linha de separação -->
+  <hr />
+
+  <!-- Lista de produtos -->
+  <div class="products">
+    <div class="products-header">
+      <h2>Produtos</h2>
+      <button *ngIf="isOwner" (click)="createProduct()" class="btn-primary">
+        <i class="fas fa-plus"></i> Criar Produto
+      </button>
+    </div>
+
+    <div *ngIf="!isLoading && products.length === 0" class="no-products">
+      <p>Nenhum produto disponível no momento.</p>
+    </div>
+
+    <div class="product-grid">
+      <div *ngFor="let product of products" class="product-card">
+        <div class="product-content">
+          <h3>{{ product.name }}</h3>
+          <p class="product-description">{{ product.description }}</p>
+          <div class="product-details">
+            <p><strong>Preço:</strong> R$ {{ product.price | number:'1.2-2' }}</p>
+            <p><strong>Estoque:</strong> {{ product.stock }} unidades</p>
+          </div>
+
+          <!-- Botões para o cliente -->
+          <div *ngIf="!isOwner" class="customer-actions">
+            <button (click)="addToCart(product.id)" class="btn-primary" [disabled]="product.stock === 0">
+              <i class="fas fa-cart-plus"></i> Adicionar
+            </button>
+            <button (click)="removeFromCart(product.id)" class="btn-secondary">
+              <i class="fas fa-cart-arrow-down"></i> Remover
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<ng-template #loading>
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <p>Carregando informações da loja...</p>
+  </div>
+</ng-template>

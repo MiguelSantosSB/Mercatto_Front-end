@@ -1,0 +1,16 @@
+<div class="chatbot-container">
+  <div class="chat-window">
+    <div *ngFor="let message of messages" class="message">
+      {{ message }}
+    </div>
+  </div>
+  
+  <div class="input-container">
+    <input
+      [(ngModel)]="userInput"
+      (keyup.enter)="processInput()"
+      placeholder="Digite sua resposta..."
+    />
+    <button (click)="processInput()">Enviar</button>
+  </div>
+</div>
